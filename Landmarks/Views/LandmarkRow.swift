@@ -15,10 +15,3 @@ struct LandmarkRow: View {
         }
     }
 }
-
-#Preview {
-    Group {
-        LandmarkRow(landmark: landmarks[0])
-        LandmarkRow(landmark: landmarks[1])
-    }
-}
