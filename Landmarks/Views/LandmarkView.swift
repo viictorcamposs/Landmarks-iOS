@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ContentView: View {
+struct LandmarkView: View {
     var body: some View {
         VStack {
             MapView()
@@ -36,5 +36,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    LandmarkView()
 }

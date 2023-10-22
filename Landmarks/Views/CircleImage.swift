@@ -10,7 +10,3 @@ struct CircleImage: View {
             .shadow(radius: 7)
     }
 }
-
-#Preview {
-    CircleImage()
-}
