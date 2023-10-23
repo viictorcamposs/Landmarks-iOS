@@ -7,7 +7,7 @@ struct Landmark: Codable, Identifiable {
     var park: String
     var state: String
     var description: String
-    let isFavorite: Bool
+    var isFavorite: Bool
     
     private var imageName: String
     var image: Image {
