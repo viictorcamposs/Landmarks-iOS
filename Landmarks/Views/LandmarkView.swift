@@ -8,4 +8,5 @@ struct LandmarkView: View {
 
 #Preview {
     LandmarkView()
+        .environment(ModelData())
 }
