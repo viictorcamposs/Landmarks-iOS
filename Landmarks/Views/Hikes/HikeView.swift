@@ -26,18 +26,23 @@ struct HikeView: View {
                 Spacer()
 
                 Button {
-                    showDetail.toggle()
+                    withAnimation {
+                        showDetail.toggle()
+                    }
                 } label: {
                     Label("Graph", systemImage: "chevron.right.circle")
                         .labelStyle(.iconOnly)
                         .imageScale(.large)
                         .rotationEffect(.degrees(showDetail ? 90 : 0))
+                        .animation(nil, value: showDetail)
+                        .scaleEffect(showDetail ? 1.2 : 1)
                         .padding()
                 }
             }
 
             if showDetail {
                 HikeDetail(hike: hike)
+                    .scenePadding(.top)
             }
         }
     }
