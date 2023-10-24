@@ -3,6 +3,7 @@ import Foundation
 @Observable
 class ModelData {
     var landmarks: [Landmark] = load(file: "landmarkData.json")
+    var hikes: [Hike] = load(file: "hikeData.json")
 }
 
 func load<T: Decodable>(file filename: String) -> T {
