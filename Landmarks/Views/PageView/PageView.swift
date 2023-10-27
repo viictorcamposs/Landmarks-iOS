@@ -5,8 +5,12 @@ struct PageView<Page: View>: View {
     var pages: [Page]
     
     var body: some View {
-        PageViewController(currentPage: $currentPage, pages: pages)
-        Text("Current Page: \(currentPage)")
+        ZStack(alignment: .bottomTrailing) {
+            PageViewController(currentPage: $currentPage, pages: pages)
+            PageControl(currentPage: $currentPage, numberOfPages: pages.count)
+                .frame(width: CGFloat(pages.count * 18))
+                .padding(.trailing)
+        }
     }
 }
 
