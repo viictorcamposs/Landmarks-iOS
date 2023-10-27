@@ -2,6 +2,7 @@ import SwiftUI
 import UIKit
 
 struct PageViewController<Page: View>: UIViewControllerRepresentable {
+    @Binding var currentPage: Int
     var pages: [Page]
     
     func makeCoordinator() -> Coordinator {
@@ -15,19 +16,20 @@ struct PageViewController<Page: View>: UIViewControllerRepresentable {
         )
         
         pageViewController.dataSource = context.coordinator
+        pageViewController.delegate = context.coordinator
         
         return pageViewController
     }
     
     func updateUIViewController(_ uiViewController: UIPageViewController, context: Context) {
         uiViewController.setViewControllers(
-            [context.coordinator.controllers[0]],
+            [context.coordinator.controllers[currentPage]],
             direction: .forward,
             animated: true
         )
     }
     
-    class Coordinator: NSObject, UIPageViewControllerDataSource {
+    class Coordinator: NSObject, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
         var parent: PageViewController
         var controllers = [UIViewController]()
         
@@ -59,5 +61,17 @@ struct PageViewController<Page: View>: UIViewControllerRepresentable {
             
             return controllers[index + 1]
         }
+        
+        func pageViewController(
+            _ pageViewController: UIPageViewController,
+            didFinishAnimating finished: Bool,
+            previousViewControllers: [UIViewController],
+            transitionCompleted completed: Bool) {
+                if completed,
+                   let visibleViewController = pageViewController.viewControllers?.first,
+                   let index = controllers.firstIndex(of: visibleViewController) {
+                    parent.currentPage = index
+                }
+            }
     }
 }
